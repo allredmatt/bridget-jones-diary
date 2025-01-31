@@ -39,8 +39,13 @@ class Entry {
     }
 
     async update(data){
-        const {id, title, text, category} = data
-        const response = await db.query(`UPDATE entries SET title=$2, text=$3, category=$4 WHERE entries_id = $1 RETURNING *;`, [id, title, text, category])
+        const {entries_id, title, text, category} = data
+        const response = await db.query(`UPDATE entries SET title=$2, text=$3, category=$4 WHERE entries_id = $1 RETURNING *;`, [entries_id, title, text, category])
+        return new Entry(response.rows[0])
+    }
+
+    async destroy(){
+        await db.query("DELETE FROM entries WHERE entries_id = $1 RETURNING *;", [this.entries_id])
     }
 }
 
