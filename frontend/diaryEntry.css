@@ -1,0 +1,35 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #453750;
+    color: white;
+}
+
+.iphone-container {
+    width: 430px;  
+    height: 932px; 
+    background-color: white;
+    border-radius: 30px; 
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-family: Arial, sans-serif;
+}
+
+input{
+    background-color: #A393BF;
+}
+
+#entry-btn {
+    background-color: #9882AC;
+    border: none;
+}
+
+input::placeholder, input[type="datetime-local"] {
+    color: white;
+}
+
