@@ -1,0 +1,25 @@
+{
+  "name": "bridget-jones-diary",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/allredmatt/bridget-jones-diary#readme",
+  "bugs": {
+    "url": "https://github.com/allredmatt/bridget-jones-diary/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allredmatt/bridget-jones-diary.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "setup-db": "node ./dataBase/setup.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "pg": "^8.13.1"
+  }
+}
