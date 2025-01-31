@@ -4,23 +4,35 @@
 const dateInput = document.querySelector("#entry-date form") //check if this works as well with the code above
 const titleInput = document.querySelector("#entry-title form")
 const textInput = document.querySelector("#entry-text")
-const submitBtn = document.querySelector("#entry-btn")
+const submitBtn = document.querySelector("form")
+const entriesUL = document.querySelector("#entrySection > ul")
 
+const mainUrl = 'https://bridget-jones-diary.onrender.com'
 
-textInput.addEventListener("submit", extractEntry)
+submitBtn.addEventListener("submit", extractEntry)
 
 function extractEntry(e) {
     e.preventDefault()
-    fetchEntryData(e.target[0].value)
+    postEntryData(e.target)
     e.target[0].value = ""
 }
 
-async function fetchEntryData(entry) {
+async function postEntryData(entry) {
+    const data = {
+        "title": entry['entry-title'].value,
+        "text": entry['entry-text'].value
+    }
+    const options = {
+        method: 'POST',
+        body: JSON.stringify( data ),
+        headers: {
+            "Content-type": "application/json"
+          }
+    }
     try {
-        const response = await fetch(`https://bridget-jones-diary.onrender.com/entries${entry}`)
-        if (response.ok) {
-            const data = await response.json()    
-            addEntry(data)
+        const response = await fetch(`${mainUrl}/entries`, options)
+        if (response.status === 201) {
+            //location.reload()
         } else {
             throw "Error: http status code =" + response.status
         }
@@ -31,15 +43,27 @@ async function fetchEntryData(entry) {
         
 }
 
-let entry = ''
+async function fetchDairyData() {
+    try {
+        const response = await fetch(`${mainUrl}/entries`)
+        if (response.status === 200) {
+            const data = await response.json()
+            data.forEach(entry => addEntry(entry))
+        } else {
+            throw "Error: http status code =" + response.status
+        }
+        
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+fetchDairyData()
 
 //continue setting up from here after creating the html file
 
 function addEntry(entry) {
     const li = document.createElement("li")
-    li.textContent = fruit.name //check this one
-    fruitList.appendChild(li) //check which is from the above
-
-    calories += fruit.nutritions.calories
-    fruitNutrition.textContent = calories
+    li.textContent = `${entry.title}: ${entry.text}`  //check this one
+    entriesUL.appendChild(li) //check which is from the above
 }
