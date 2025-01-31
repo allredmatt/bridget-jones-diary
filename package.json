@@ -16,7 +16,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "setup-db": "node ./dataBase/setup.js"
+    "setup-db": "node ./dataBase/setup.js",
+    "server": "node ./server/index.js",
+    "server-dev": "nodemon ./server/index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
