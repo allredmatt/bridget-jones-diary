@@ -20,6 +20,19 @@ async function show(req, res) {
     }
 }
 
+async function search(req, res) {
+    try {
+        console.log(req.params.start, req.params.end);
+        const startDate = new Date(req.params.start)
+        const endDate = new Date(req.params.end)
+        console.log(startDate, endDate);
+        const entries = await Entry.getBetweenDates(startDate, endDate);
+        res.status(200).json(entries);
+    } catch (err) {
+        res.status(404).json({ error: err.message });
+    }
+}
+
 async function create(req, res) {
     try {
         const entry = req.body;
@@ -59,6 +72,7 @@ module.exports = {
     index,
     show,
     create,
+    search,
     update,
     destroy,
 };

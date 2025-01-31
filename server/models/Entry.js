@@ -38,6 +38,11 @@ class Entry {
         return new Entry(newEntry.rows[0])
     }
 
+    static async getBetweenDates(start, end) {
+        const response = await db.query(`SELECT * FROM entries WHERE date BETWEEN $1 AND $2;`, [start, end])
+        return response.rows.map(ent => new Entry(ent))
+    }
+
     async update(data){
         const {entries_id, title, text, category} = data
         const response = await db.query(`UPDATE entries SET title=$2, text=$3, category=$4 WHERE entries_id = $1 RETURNING *;`, [entries_id, title, text, category])
