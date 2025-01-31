@@ -1,5 +1,9 @@
 # API
 
+## Render hosted
+
+You can interact with a live server [here](https://bridget-jones-diary.onrender.com).
+
 ## End points
 
 | Route | Method | Response |
